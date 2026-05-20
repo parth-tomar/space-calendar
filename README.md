@@ -41,6 +41,7 @@ The tooltip takes your **current Earth time**, scales it by the ratio of Earth's
 const localHours = (earthHours / planet.dayHours) * 24;
 ```
 
+---
 ## Browser Support
 
 Works in all modern browsers. No polyfills needed.
@@ -53,7 +54,7 @@ Works in all modern browsers. No polyfills needed.
 
 ## License
 
-MIT — do whatever you want with it. A star ⭐ is appreciated.
+[MIT License](LICENSE) — do whatever you want with it. A star ⭐ is appreciated.
 
 ---
 
