@@ -1,106 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Space Datepicker</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPACE CALENDAR — Solar System Time</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ── Space starfield background ── -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- Star field canvas -->
+  <canvas id="starfield"></canvas>
 
-  <!-- ── Unused solar canvas slot (reserved) ── -->
-  <canvas id="solar-canvas"></canvas>
+  <button id="ui-toggle" class="ui-toggle" type="button" aria-pressed="false">HIDE UI</button>
 
-  <!-- ── Nebula colour overlays ── -->
-  <div class="nebula-layer"></div>
+  <!-- Header -->
+  <header>
+    <div class="header-center">
+      <h1>SPACE<br/><span>CALENDAR</span></h1>
+      <p class="subtitle">Solar System Time Observatory</p>
+    </div>
+  </header>
 
-  <!-- ── Tooltip ── -->
-  <div class="tooltip" id="tooltip">
-    <span class="tooltip-title" id="tt-title"></span>
-    <span id="tt-body"></span>
+  <!-- Earth panel -->
+  <aside class="earth-panel">
+    <span class="label">EARTH DATE</span>
+    <span id="earth-date" class="earth-date"></span>
+    <span class="label">EARTH TIME</span>
+    <span id="earth-time" class="earth-time"></span>
+  </aside>
+
+  <!-- Object bar -->
+  <aside class="object-bar">
+    <div class="object-bar-title">OBJECTS</div>
+    <div class="object-bar-list">
+      <button class="object-chip" type="button" data-target="sun">Sun</button>
+      <button class="object-chip" type="button" data-target="mercury">Mercury</button>
+      <button class="object-chip" type="button" data-target="venus">Venus</button>
+      <button class="object-chip" type="button" data-target="earth-planet">Earth</button>
+      <button class="object-chip" type="button" data-target="mars">Mars</button>
+      <button class="object-chip" type="button" data-target="jupiter">Jupiter</button>
+      <button class="object-chip" type="button" data-target="saturn">Saturn</button>
+      <button class="object-chip" type="button" data-target="uranus">Uranus</button>
+      <button class="object-chip" type="button" data-target="neptune">Neptune</button>
+    </div>
+  </aside>
+
+  <!-- Scrollable stage -->
+  <main id="space-stage">
+    <div id="solar-system">
+
+    <!-- Sun -->
+    <div class="sun" id="sun" data-name="Sun"
+      data-day="About 25 Earth days"
+      data-year="4.6 billion years"
+      data-fact="The Sun contains 99.8% of the solar system's mass."
+      data-color="#ffb347">
+      <div class="sun-corona"></div>
+      <div class="sun-surface"></div>
+      <div class="sun-glow"></div>
+    </div>
+
+    <!-- Orbits & Planets -->
+
+    <!-- Mercury -->
+    <div class="orbit" id="orbit-mercury" style="--r:110px; --duration:2.4s;">
+      <div class="planet-wrap">
+        <div class="planet" id="mercury" data-name="Mercury"
+          data-day="58.6 Earth days"
+          data-year="88 Earth days"
+          data-fact="A year on Mercury is shorter than its day."
+          data-color="#b5b5b5"
+          style="--size:10px; --color:#b5b5b5; --glow:#888;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Venus -->
+    <div class="orbit" id="orbit-venus" style="--r:160px; --duration:6.2s;">
+      <div class="planet-wrap">
+        <div class="planet" id="venus" data-name="Venus"
+          data-day="243 Earth days"
+          data-year="225 Earth days"
+          data-fact="Venus rotates backwards — the sun rises in the west."
+          data-color="#e8c97e"
+          style="--size:15px; --color:#e8c97e; --glow:#c8a040;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Earth -->
+    <div class="orbit" id="orbit-earth" style="--r:220px; --duration:10s;">
+      <div class="planet-wrap">
+        <div class="planet earth-planet" id="earth-planet" data-name="Earth"
+          data-day="24 hours"
+          data-year="365.25 days"
+          data-fact="Home. The only world we know harbours life."
+          data-color="#4a9eff"
+          style="--size:18px; --color:#4a9eff; --glow:#2266cc;">
+          <div class="moon-orbit">
+            <div class="moon"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mars -->
+    <div class="orbit" id="orbit-mars" style="--r:285px; --duration:18.8s;">
+      <div class="planet-wrap">
+        <div class="planet" id="mars" data-name="Mars"
+          data-day="24 hrs 37 min"
+          data-year="687 Earth days"
+          data-fact="Mars has the tallest volcano in the solar system — Olympus Mons."
+          data-color="#c1440e"
+          style="--size:13px; --color:#c1440e; --glow:#8b2200;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Jupiter -->
+    <div class="orbit" id="orbit-jupiter" style="--r:370px; --duration:118s;">
+      <div class="planet-wrap">
+        <div class="planet" id="jupiter" data-name="Jupiter"
+          data-day="9 hrs 56 min"
+          data-year="11.86 Earth years"
+          data-fact="Jupiter's Great Red Spot storm has raged for over 350 years."
+          data-color="#c88b3a"
+          style="--size:38px; --color:#c88b3a; --glow:#8b5a10;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Saturn -->
+    <div class="orbit" id="orbit-saturn" style="--r:460px; --duration:294s;">
+      <div class="planet-wrap">
+        <div class="saturn-group">
+          <div class="planet saturn-planet" id="saturn" data-name="Saturn"
+            data-day="10 hrs 42 min"
+            data-year="29.5 Earth years"
+            data-fact="Saturn's rings are made of ice and rock, up to 1 km thick."
+            data-color="#e4d191"
+            style="--size:32px; --color:#e4d191; --glow:#b09030;">
+          </div>
+          <div class="saturn-rings"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uranus -->
+    <div class="orbit" id="orbit-uranus" style="--r:535px; --duration:840s;">
+      <div class="planet-wrap">
+        <div class="planet" id="uranus" data-name="Uranus"
+          data-day="17 hrs 14 min"
+          data-year="84 Earth years"
+          data-fact="Uranus rotates on its side — its poles face the Sun."
+          data-color="#7de8e8"
+          style="--size:22px; --color:#7de8e8; --glow:#30b0b0;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Neptune -->
+    <div class="orbit" id="orbit-neptune" style="--r:600px; --duration:1650s;">
+      <div class="planet-wrap">
+        <div class="planet" id="neptune" data-name="Neptune"
+          data-day="16 hrs 6 min"
+          data-year="165 Earth years"
+          data-fact="Winds on Neptune reach 2,100 km/h — the fastest in the solar system."
+          data-color="#3f54ba"
+          style="--size:20px; --color:#3f54ba; --glow:#1a2a80;">
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </main>
+
+  <!-- Tooltip -->
+  <div id="tooltip" class="tooltip hidden">
+    <div class="tooltip-header">
+      <span class="tooltip-dot"></span>
+      <span class="tooltip-name"></span>
+    </div>
+    <div class="tooltip-divider"></div>
+    <div class="tooltip-row">
+      <span class="tooltip-label">DAY LENGTH</span>
+      <span class="tooltip-day"></span>
+    </div>
+    <div class="tooltip-row">
+      <span class="tooltip-label">YEAR LENGTH</span>
+      <span class="tooltip-year"></span>
+    </div>
+    <div class="tooltip-row">
+      <span class="tooltip-label">EARTH TIME NOW</span>
+      <span class="tooltip-earth-now"></span>
+    </div>
+    <div class="tooltip-fact"></div>
   </div>
 
-  <!-- ══════════════════════════════
-       MAIN LAYOUT
-  ══════════════════════════════ -->
-  <div id="app">
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-title">HOVER OR CLICK OBJECTS FOR TIME DATA</span>
+  </div>
 
-    <!-- ── SUN ── -->
-    <div class="planet-panel" id="sun-panel">
-      <div class="planet-canvas-wrap" id="sun-wrap">
-        <div class="planet-ring" style="--op:0.4; border-color:rgba(255,180,50,0.25)"></div>
-        <div class="planet-ring" style="--op:0.2; border-color:rgba(255,140,30,0.15); animation-delay:.6s"></div>
-        <div class="planet-ring" style="--op:0.1; border-color:rgba(255,100,20,0.1);  animation-delay:1.2s"></div>
-        <canvas class="planet-3d" id="sun-canvas" width="180" height="180"></canvas>
-      </div>
-      <div class="planet-label">SOL · G-TYPE STAR</div>
-      <div class="planet-stat">
-        Surface: 5,778 K<br>
-        Age: 4.6 Gyr · 1 AU
-      </div>
-    </div>
-
-    <!-- ── DATEPICKER ── -->
-    <div class="datepicker-glass">
-
-      <div class="dp-chip">
-        <span class="dp-chip-label">⬡ STARDATE NAVIGATOR ⬡</span>
-      </div>
-
-      <div class="nav-row">
-        <button class="nav-btn" id="prev-btn">&#8249;</button>
-        <div class="month-year-block">
-          <span class="month-name-text" id="month-name"></span>
-          <span class="year-text"       id="year-num"></span>
-        </div>
-        <button class="nav-btn" id="next-btn">&#8250;</button>
-      </div>
-
-      <div class="day-labels">
-        <div class="day-lbl">SUN</div>
-        <div class="day-lbl">MON</div>
-        <div class="day-lbl">TUE</div>
-        <div class="day-lbl">WED</div>
-        <div class="day-lbl">THU</div>
-        <div class="day-lbl">FRI</div>
-        <div class="day-lbl">SAT</div>
-      </div>
-
-      <div class="days-grid" id="days-grid"></div>
-
-      <div class="selected-row">
-        <span class="sel-icon">🛸</span>
-        <div class="sel-meta">
-          <span class="sel-sublabel">Mission Date</span>
-          <span class="sel-date-text" id="selected-date-label">Select a Stardate</span>
-        </div>
-      </div>
-
-    </div><!-- /.datepicker-glass -->
-
-    <!-- ── EARTH + MOON ── -->
-    <div class="planet-panel" id="earth-panel">
-      <div class="planet-canvas-wrap" id="earth-wrap">
-        <div class="planet-ring" style="--op:0.4"></div>
-        <div class="planet-ring" style="--op:0.2; animation-delay:.5s"></div>
-        <div class="planet-ring" style="--op:0.1; animation-delay:1s"></div>
-        <canvas class="planet-3d" id="earth-canvas" width="180" height="180"></canvas>
-      </div>
-      <div class="planet-label">TERRA · CLASS M</div>
-      <div class="planet-stat">
-        Orbital Period: 365.25 days<br>
-        Tilt: 23.5° · 1 Moon
-      </div>
-    </div>
-
-  </div><!-- /#app -->
-
-  <!-- ── Scripts (order matters: Three.js loaded in <head>) ── -->
-  <script src="main.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
