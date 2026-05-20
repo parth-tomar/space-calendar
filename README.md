@@ -20,19 +20,6 @@
 
 ---
 
-## File Structure
-
-```
-cosmos-calendar/
-├── index.html   # Markup — planets, orbits, tooltip, header
-├── style.css    # All styles — orbits, animations, tooltip, starfield layout
-└── script.js    # Starfield canvas, live clock, planet time logic, tooltip
-```
-
-All three files must stay in the same directory — `index.html` links to the other two relatively.
-
----
-
 ## How Planet Time Works
 
 Each planet has a known **solar day** (how long it takes to rotate once relative to the Sun):
@@ -53,20 +40,6 @@ The tooltip takes your **current Earth time**, scales it by the ratio of Earth's
 ```js
 const localHours = (earthHours / planet.dayHours) * 24;
 ```
-
----
-
-## Planet Facts (hover to discover)
-
-- **Mercury** — A year is shorter than its own day
-- **Venus** — Rotates backwards; the sun rises in the west
-- **Mars** — Home to Olympus Mons, the tallest volcano in the solar system
-- **Jupiter** — The Great Red Spot storm has raged for over 350 years
-- **Saturn** — Its rings are made of ice and rock, up to 1 km thick
-- **Uranus** — Rotates on its side; its poles face the Sun
-- **Neptune** — Winds reach 2,100 km/h, the fastest in the solar system
-
----
 
 ## Browser Support
 
