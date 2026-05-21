@@ -1,6 +1,6 @@
 # Space Calendar
 
-> *A real-time solar system clock — hover any planet to see what time it is there.*
+> *A real-time solar system clock, hover any planet to see what time it is there.*
 
 ![Solar System](https://img.shields.io/badge/planets-8-orange?style=flat-square&logo=nasa)
 ![Vanilla JS](https://img.shields.io/badge/vanilla-JS-yellow?style=flat-square&logo=javascript)
