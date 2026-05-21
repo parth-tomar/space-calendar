@@ -40,15 +40,6 @@ const localHours = (earthHours / planet.dayHours) * 24;
 ```
 
 ---
-## Browser Support
-
-Works in all modern browsers. No polyfills needed.
-
-| Chrome | Firefox | Safari | Edge |
-|--------|---------|--------|------|
-| ✅     | ✅      | ✅     | ✅   |
-
----
 
 ## License
 
